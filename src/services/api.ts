@@ -2,8 +2,12 @@ import { PaginationData } from './../types/PaginationData';
 import { apiPost, apiGet } from './axios';
 import { UserLoginDto } from './../dtos/UserLoginDto';
 
-export const login = (data: UserLoginDto) => {
+export const authLogin = (data: UserLoginDto) => {
   return apiPost('/login', { data });
+};
+
+export const authLoginByToken = () => {
+  return apiGet('/login');
 };
 
 export const getCourses = (params: PaginationData) => {

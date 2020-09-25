@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { baseURL } from './../constants/baseUrl';
+import { baseURL } from '../constants/baseURL';
 import { getAuthToken } from './token';
 
 export const axiosClient = () => {
@@ -18,24 +18,17 @@ export const errorHandler = (error: AxiosError) => {
     console.log(error.response.status);
     console.log(error.response.headers);
 
-    throw {
-      error: error.response.data.message,
-      status: error.response.status,
-    };
+    throw error;
   } else if (error.request) {
     // The request was made but no response was received
     console.log(error.request);
 
-    throw {
-      error: 'Не удалось выполнить запрос',
-    };
+    throw new Error('Не удалось выполнить запрос');
   } else {
     // Something happened in setting up the request that triggered an Error
     console.log('Error', error.message);
 
-    throw {
-      error: error.message,
-    };
+    throw new Error(error.message);
   }
 };
 
