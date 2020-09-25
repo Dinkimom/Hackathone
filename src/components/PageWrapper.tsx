@@ -1,3 +1,4 @@
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import React, { ReactNode } from 'react';
 import { Footer } from './Footer';
 import { Header } from './Header';
@@ -7,14 +8,24 @@ interface Props {
   children: ReactNode;
 }
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#212329',
+    },
+  },
+});
+
 export const PageWrapper: React.FC<Props> = ({ children }) => {
   return (
-    <div className="page-wrapper">
-      <Header />
+    <ThemeProvider theme={theme}>
+      <div className="page-wrapper">
+        <Header />
 
-      <main>{children}</main>
+        <main>{children}</main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 };

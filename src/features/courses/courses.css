@@ -1,10 +1,53 @@
 .courses__main {
   display: grid;
   grid-template-columns: auto 1fr;
+  grid-column-gap: 40px;
+  padding-bottom: 40px;
 }
 
 .courses__main__filters {
   display: flex;
   flex-direction: column;
   width: 200px;
+}
+
+.courses__main__list .course {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 50px;
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.courses__main__list .course h3 {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.course__right-column p {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+}
+
+.courses__main__list .course p {
+  font-size: 14px;
+  line-height: 16px;
+  opacity: 0.8;
+}
+
+.courses__main__list .course span {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.course__left-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.course__left-column button {
+  margin-top: auto;
+  width: 210px;
 }
