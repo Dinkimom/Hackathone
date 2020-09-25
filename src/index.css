@@ -4,6 +4,7 @@
   --container-max-width: 1280px;
   --border-radius: 6px;
   --grid-columns: 1fr 1fr;
+  --blue-color: #2f80ed;
 }
 
 @media screen and (max-width: 1368px) {
@@ -54,7 +55,7 @@ button.primary {
 }
 
 button.primary:hover {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 h3 {

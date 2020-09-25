@@ -1,0 +1,25 @@
+.login-form p {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.login-form.number p:first-of-type {
+  margin-top: 8px;
+  margin-top: 24px;
+}
+
+.login-form.number p:last-of-type {
+  margin-top: 0;
+}
+
+.login-form.number b {
+  color: var(--blue-color);
+}
+
+.login-form.otp {
+  color: var(--blue-color);
+}
+
+.login-form button {
+  width: 100%;
+}

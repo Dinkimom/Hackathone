@@ -19,6 +19,15 @@
   height: 62px;
 }
 
+.header__links {
+	display: flex;
+	align-items: center;
+}
+
+.header__links img {
+	margin-left: 57px;
+}
+
 .header__links a {
   margin-left: 24px;
   font-size: 12px;

@@ -4,7 +4,7 @@ import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import { RootState } from 'app/store';
 import { ContentWrapper } from 'components/ContentWrapper';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import './courses.css';
 
@@ -18,8 +18,12 @@ export const Courses: React.FC = () => {
   const { isLoading, list, error } = useSelector((state: RootState) => state.courses);
   const classes = useStyles();
 
-  const renderCourses = () => {
-    return ['', '', ''].map(item => (
+  const renderCourses = useMemo(() => {
+    if (list.length === 0) {
+      return <h4 className="courses-empty">Не найдено ни одного курса</h4>;
+    }
+
+    return list.map(item => (
       <div className="course">
         <div className="course__left-column">
           <h3>Тренинг “Переговоры без поражений”</h3>
@@ -46,7 +50,7 @@ export const Courses: React.FC = () => {
         </div>
       </div>
     ));
-  };
+  }, [list]);
 
   return (
     <ContentWrapper isLoading={isLoading} error={error} className="courses">
@@ -70,7 +74,7 @@ export const Courses: React.FC = () => {
             <Select label="Цена"></Select>
           </FormControl>
         </div>
-        <div className="courses__main__list">{renderCourses()}</div>
+        <div className="courses__main__list">{renderCourses}</div>
       </div>
     </ContentWrapper>
   );

@@ -19,6 +19,8 @@ export const App: React.FC = () => {
           <Route exact path="/courses" component={Courses} />
         </Switch>
       </Router>
+
+      <Auth />
     </PageWrapper>
   );
 };
