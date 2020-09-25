@@ -1,8 +1,17 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import authReducer from '../features/auth/authSlice';
 import counterReducer from '../features/counter/counterSlice';
+import courseReducer from '../features/course/courseSlice';
+import profileReducer from '../features/profile/profileSlice';
+import coursesReducer from './../features/courses/coursesSlice';
 
 export const store = configureStore({
   reducer: {
+    auth: authReducer,
+    course: courseReducer,
+    courses: coursesReducer,
+    profile: profileReducer,
+    // todo delete below
     counter: counterReducer,
   },
 });
