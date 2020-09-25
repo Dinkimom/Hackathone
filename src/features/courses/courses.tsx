@@ -1,9 +1,11 @@
 import { InputLabel } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
+import { RootState } from 'app/store';
+import { ContentWrapper } from 'components/ContentWrapper';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import './courses.css';
 
 const useStyles = makeStyles(theme => ({
@@ -13,6 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Courses: React.FC = () => {
+  const { isLoading, list, error } = useSelector((state: RootState) => state.courses);
   const classes = useStyles();
 
   const renderCourses = () => {
@@ -46,7 +49,7 @@ export const Courses: React.FC = () => {
   };
 
   return (
-    <div className="courses container">
+    <ContentWrapper isLoading={isLoading} error={error} className="courses">
       <h1>Курсы</h1>
       <div className="courses__main">
         <div className="courses__main__filters">
@@ -69,6 +72,6 @@ export const Courses: React.FC = () => {
         </div>
         <div className="courses__main__list">{renderCourses()}</div>
       </div>
-    </div>
+    </ContentWrapper>
   );
 };

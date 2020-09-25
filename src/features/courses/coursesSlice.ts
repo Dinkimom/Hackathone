@@ -14,7 +14,7 @@ interface CoursesSlice {
 
 const initialState: CoursesSlice = {
   isLoading: false,
-  error: null,
+  error: 'Error oh no',
   list: [],
   pagination: {
     currentPage: 1,
