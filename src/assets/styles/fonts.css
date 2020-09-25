@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'Rubrik New';
+  src: local('Rubrik New Regular'), local('RubrikNew-Regular'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Regular.woff2') format('woff2'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubrik New';
+  src: local('Rubrik New SemiBold'), local('RubrikNew-SemiBold'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-SemiBold.woff2') format('woff2'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubrik New';
+  src: local('Rubrik New Light'), local('RubrikNew-Light'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Light.woff2') format('woff2'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubrik New';
+  src: local('Rubrik New ExtraBold'), local('RubrikNew-ExtraBold'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-ExtraBold.woff2') format('woff2'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubrik New';
+  src: local('Rubrik New Bold'), local('RubrikNew-Bold'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Bold.woff2') format('woff2'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubrik New';
+  src: local('Rubrik New ExtraLight'), local('RubrikNew-ExtraLight'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-ExtraLight.woff2') format('woff2'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubrik New';
+  src: local('Rubrik New Medium'), local('RubrikNew-Medium'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Medium.woff2') format('woff2'),
+      url('../fonts/rubrik-new/hinted-RubrikNew-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}

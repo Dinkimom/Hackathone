@@ -1,13 +1,50 @@
+:root {
+  --primary-color: #212329;
+  --primary-font-color: #070707;
+  --container-max-width: 1280px;
+  --border-radius: 6px;
+}
+
+@media screen and (max-width: 1368px) {
+  :root {
+    --inner-padding: 60px;
+    --container-max-width: calc(100% - 2 * var(--inner-padding));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --inner-padding: 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  :root {
+    --inner-padding: 15px;
+  }
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+* {
+  outline: none;
+  text-decoration: none;
+}
+
+button.primary {
+  border: none;
+  background: var(--primary-color);
+  padding: 18px 40px;
+  color: white;
+  border-radius: var(--border-radius);
 }
