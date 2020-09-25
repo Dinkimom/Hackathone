@@ -18,9 +18,9 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 480px) {
   :root {
-    --inner-padding: 15px;
+    --inner-padding: 20px;
   }
 }
 
@@ -30,6 +30,7 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
 }
 
 code {
@@ -47,4 +48,10 @@ button.primary {
   padding: 18px 40px;
   color: white;
   border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all .5s;
+}
+
+button.primary:hover {
+	opacity: .8;
 }
