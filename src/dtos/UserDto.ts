@@ -1,5 +1,7 @@
+import { PersonDto } from './PersonDto';
+
 export interface UserDto {
-  userId: number;
-  login: string;
+  id: number;
   email: string;
+  person: PersonDto;
 }

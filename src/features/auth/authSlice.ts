@@ -3,7 +3,7 @@ import { deleteAuthToken } from 'services/token';
 import { AppThunk } from '../../app/store';
 import { UserDto } from './../../dtos/UserDto';
 import { UserLoginDto } from './../../dtos/UserLoginDto';
-import { authLogin, authLoginByToken } from './../../services/api';
+import { authLogin } from './../../services/api';
 
 interface AuthState {
   isOpened: boolean;
@@ -22,7 +22,7 @@ const initialState: AuthState = {
   isLoading: false,
   error: null,
   isChecked: false,
-  isAuthorized: true,
+  isAuthorized: false,
   user: null,
 };
 
