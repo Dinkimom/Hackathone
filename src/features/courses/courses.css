@@ -1,0 +1,10 @@
+.courses__main {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.courses__main__filters {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}

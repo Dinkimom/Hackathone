@@ -1,0 +1,38 @@
+.header {
+  border-bottom: 1px solid #21232934;
+  background: #f5f5f7;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.header .container {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-spacer {
+  height: 62px;
+}
+
+.header__links a {
+  margin-left: 24px;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--primary-font-color);
+}
+
+@media screen and (max-width: 480px) {
+  .header__links a {
+    display: none;
+  }
+}
+
+.header__links button {
+  padding: 10px 16px;
+  font-size: 12px;
+  line-height: 14px;
+  margin-left: 24px;
+}

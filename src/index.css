@@ -3,6 +3,7 @@
   --primary-font-color: #070707;
   --container-max-width: 1280px;
   --border-radius: 6px;
+  --grid-columns: 1fr 1fr;
 }
 
 @media screen and (max-width: 1368px) {
@@ -49,9 +50,36 @@ button.primary {
   color: white;
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 button.primary:hover {
-	opacity: .8;
+  opacity: 0.8;
+}
+
+h3 {
+  margin: 24px 0;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 28px;
+  margin: 20px 0;
+}
+
+p {
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: var(--grid-columns);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: var(--container-max-width);
 }
