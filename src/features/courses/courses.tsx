@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { RootState } from 'app/store';
 import { ContentWrapper } from 'components/ContentWrapper';
 import { EventDetails } from 'components/EventDetails';
+import { QR } from 'components/QR';
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
@@ -37,29 +38,32 @@ export const Courses: React.FC = () => {
     };
 
     return list.map(item => (
-      <div className="course">
+      <div className={`course ${isMy ? 'my' : ''}`}>
         <div className="course__left-column">
           <h3>{item.name}</h3>
           <p>{item.description}</p>
 
-          <button
-            className="primary"
-            onClick={() => handleRegister(item.id)}
-            disabled={!isAuthorized}
-          >
-            {!item.price ? 'Зарегистрироваться' : `${item.price} ₽`}
-          </button>
+          {!isMy && (
+            <button
+              className="primary"
+              onClick={() => handleRegister(item.id)}
+              disabled={!isAuthorized}
+            >
+              {!item.price ? 'Зарегистрироваться' : `${item.price} ₽`}
+            </button>
+          )}
         </div>
         <div className="course__right-column">
           <EventDetails event={item} />
         </div>
+        {isMy && <QR price={item.price} />}
       </div>
     ));
   }, [list, isAuthorized]);
 
   return (
     <ContentWrapper isLoading={isLoading} error={error} className="courses">
-      <h1>Курсы</h1>
+      <h1>{isMy ? 'Мои курсы' : 'Курсы'}</h1>
       <div className="courses__main">{renderCourses}</div>
     </ContentWrapper>
   );

@@ -20,6 +20,10 @@
   margin-bottom: 24px;
 }
 
+.courses__main .course.my {
+	grid-template-columns: 2fr 1fr 1fr;
+}
+
 .courses-empty {
   opacity: 0.5;
   text-align: center;
