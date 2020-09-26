@@ -39,7 +39,7 @@ export const Auth: React.FC = () => {
             Подтверждая номер телефона вы принимаете условия{' '}
             <b>Пользовательского соглашения и политики конфиденциальности</b>
           </p>
-          <button className="primary" type="submit">
+          <button className="primary" type="submit" disabled={isLoading}>
             Получить код
           </button>
         </div>
@@ -58,7 +58,7 @@ export const Auth: React.FC = () => {
             )}
           </InputMask>
           <p>Отправить код еще раз</p>
-          <button className="primary" type="submit">
+          <button className="primary" type="submit" disabled={isLoading}>
             Отправить код
           </button>
         </div>

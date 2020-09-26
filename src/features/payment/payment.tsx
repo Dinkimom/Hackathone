@@ -46,7 +46,7 @@ export const Payment: React.FC = () => {
             fullWidth
           />
           <div className="payment-form__action-block">
-            <button className="primary" type="submit">
+            <button className="primary" type="submit" disabled={isLoading}>
               Перейти к оплате
             </button>
             <div className="payment-form__action-block__price">
@@ -78,7 +78,7 @@ export const Payment: React.FC = () => {
             variant="outlined"
             fullWidth
           />
-          <button className="primary" type="submit">
+          <button className="primary" type="submit" disabled={isLoading}>
             Зарегистрироваться
           </button>
         </div>

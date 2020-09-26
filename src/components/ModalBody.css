@@ -7,6 +7,8 @@
   min-width: 430px;
   width: auto;
   min-height: 280px;
+  max-height: 90vh;
+  overflow: auto;
   border-radius: 16px;
   box-sizing: border-box;
 }
