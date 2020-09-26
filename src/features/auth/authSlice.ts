@@ -1,9 +1,10 @@
+import { Step } from '@material-ui/core';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { deleteAuthToken } from 'services/token';
 import { AppThunk } from '../../app/store';
 import { UserDto } from './../../dtos/UserDto';
 import { UserLoginDto } from './../../dtos/UserLoginDto';
-import { authLogin } from './../../services/api';
+import { authLogin, authLoginConfirm } from './../../services/api';
 
 interface AuthState {
   isOpened: boolean;
@@ -31,19 +32,16 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginToggle: state => {
-      state.isOpened = !state.isOpened;
+      return { ...initialState, isOpened: !state.isOpened };
     },
     loginOtpStart: state => {
       state.isOpened = true;
       state.step = 'otp';
       state.isLoading = true;
     },
-    loginOtpSuccess: (state, action: PayloadAction<UserDto>) => {
+    loginOtpSuccess: state => {
       state.isLoading = false;
       state.error = null;
-      state.isChecked = true;
-      state.isAuthorized = true;
-      state.user = action.payload;
     },
     loginOtpFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
@@ -51,9 +49,26 @@ export const authSlice = createSlice({
       state.isChecked = true;
       state.user = null;
     },
-    loginConfirmStart: () => {},
-    loginConfirmSuccess: () => {},
-    loginConfirmFailure: () => {},
+    loginConfirmStart: state => {
+      state.isLoading = false;
+      state.error = null;
+    },
+    loginConfirmSuccess: (state, action: PayloadAction<UserDto>) => {
+      state.isLoading = false;
+      state.error = null;
+      state.isChecked = true;
+      state.isAuthorized = true;
+      state.user = action.payload;
+      state.isOpened = false;
+      state.step = 'number';
+    },
+    loginConfirmFailure: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      state.isChecked = true;
+      state.user = null;
+      state.step = 'number';
+    },
     logout: () => {
       deleteAuthToken();
 
@@ -67,6 +82,9 @@ export const {
   loginOtpStart,
   loginOtpSuccess,
   loginOtpFailure,
+  loginConfirmStart,
+  loginConfirmSuccess,
+  loginConfirmFailure,
   logout,
 } = authSlice.actions;
 
@@ -76,15 +94,22 @@ export const loginOtp = (data: UserLoginDto): AppThunk => async dispatch => {
 
     const response = await authLogin(data);
 
-    dispatch(loginOtpSuccess(response.data));
+    dispatch(loginOtpSuccess());
   } catch (error) {
     dispatch(loginOtpFailure(error.message));
   }
 };
 
-export const loginConfirm = (): AppThunk => async dispatch => {
+export const loginConfirm = (data: UserLoginDto): AppThunk => async dispatch => {
   try {
-  } catch {}
+    dispatch(loginConfirmStart());
+
+    const response = await authLoginConfirm(data);
+
+    dispatch(loginConfirmSuccess(response.data));
+  } catch (error) {
+    dispatch(loginConfirmFailure(error.message));
+  }
 };
 
 export default authSlice.reducer;

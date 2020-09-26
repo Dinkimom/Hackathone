@@ -1,13 +1,10 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { baseURL } from '../constants/baseURL';
-import { getAuthToken } from './token';
 
-export const axiosClient = () => {
+export const axiosClient = (options?: AxiosRequestConfig) => {
   return axios.create({
+    ...options,
     baseURL,
-    // headers: {
-    //   Authorization: `Bearer ${getAuthToken()}`,
-    // },
   });
 };
 
@@ -33,25 +30,25 @@ export const errorHandler = (error: AxiosError) => {
 };
 
 export const apiGet = (url: string, options?: AxiosRequestConfig) => {
-  return axiosClient()
-    .get(url, options)
+  return axiosClient(options)
+    .get(url)
     .catch(error => errorHandler(error));
 };
 
 export const apiPost = (url: string, options?: AxiosRequestConfig) => {
-  return axiosClient()
-    .post(url, options)
+  return axiosClient(options)
+    .post(url)
     .catch(error => errorHandler(error));
 };
 
 export const apiPut = (url: string, options?: AxiosRequestConfig) => {
-  return axiosClient()
-    .post(url, options)
+  return axiosClient(options)
+    .post(url)
     .catch(error => errorHandler(error));
 };
 
 export const apiDelete = (url: string, options?: AxiosRequestConfig) => {
-  return axiosClient()
-    .delete(url, options)
+  return axiosClient(options)
+    .delete(url)
     .catch(error => errorHandler(error));
 };

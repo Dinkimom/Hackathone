@@ -2,10 +2,11 @@ import { Modal, TextField } from '@material-ui/core';
 import { RootState } from 'app/store';
 import { ModalBody } from 'components/ModalBody';
 import React, { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 import { useDispatch, useSelector } from 'react-redux';
 import './auth.css';
-import { loginToggle } from './authSlice';
+import { loginConfirm, loginOtp, loginToggle } from './authSlice';
 
 export const Auth: React.FC = () => {
   const { isOpened, step, error, isLoading } = useSelector(
@@ -15,6 +16,16 @@ export const Auth: React.FC = () => {
 
   const handleClose = () => {
     dispatch(loginToggle());
+  };
+
+  const { register, handleSubmit, errors } = useForm();
+
+  const onSubmit = (data: any) => {
+    if (step === 'number') {
+      dispatch(loginOtp(data));
+    } else if (step === 'otp') {
+      dispatch(loginConfirm(data));
+    }
   };
 
   const renderForm = useMemo(() => {
@@ -27,9 +38,11 @@ export const Auth: React.FC = () => {
             {() => (
               <TextField
                 required
+                name="phoneNumber"
                 label="Номер телефона"
                 type="tel"
                 variant="outlined"
+                inputRef={register}
                 fullWidth
               />
             )}
@@ -47,16 +60,34 @@ export const Auth: React.FC = () => {
     } else if (step === 'otp') {
       inner = (
         <div className="login-form otp">
-          <InputMask mask="9-9-9-9" maskPlaceholder={null}>
+          <InputMask mask="+7 (999) 999–99–99" maskPlaceholder={null}>
+            {() => (
+              <TextField
+                required
+                name="phoneNumber"
+                label="Номер телефона"
+                type="tel"
+                variant="outlined"
+                inputRef={register}
+                fullWidth
+                style={{ display: 'none' }}
+              />
+            )}
+          </InputMask>
+
+          <InputMask mask="9999" maskPlaceholder={null}>
             {() => (
               <TextField
                 label="Введите номер из СМС"
                 type="text"
+                name="code"
                 variant="outlined"
+                inputRef={register}
                 fullWidth
               />
             )}
           </InputMask>
+
           <p>Отправить код еще раз</p>
           <button className="primary" type="submit" disabled={isLoading}>
             Отправить код
@@ -67,7 +98,7 @@ export const Auth: React.FC = () => {
 
     return (
       <ModalBody title="Вход или регистрация" onClose={handleClose}>
-        <form>{inner}</form>
+        <form onSubmit={handleSubmit(onSubmit)}>{inner}</form>
       </ModalBody>
     );
   }, [step, error, isLoading]);

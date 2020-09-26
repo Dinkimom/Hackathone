@@ -3,6 +3,10 @@
   line-height: 14px;
 }
 
+.login-form .MuiInputBase-formControl {
+  margin-bottom: 20px;
+}
+
 .login-form.number p:first-of-type {
   margin-top: 8px;
   margin-top: 24px;
