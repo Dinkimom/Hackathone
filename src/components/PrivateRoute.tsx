@@ -4,24 +4,18 @@ import { useSelector } from 'react-redux';
 import { Redirect, Route, RouteProps } from 'react-router';
 
 export const PrivateRoute = ({ children, ...rest }: RouteProps) => {
-  const { isChecked, user } = useSelector((state: RootState) => state.auth);
-
-  useEffect(() => {
-    if (!isChecked) {
-      // todo here will be auth token check
-    }
-  }, [isChecked]);
+  const { isAuthorized } = useSelector((state: RootState) => state.auth);
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        isChecked && user === null ? (
+        isAuthorized ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: '/',
               state: { from: location },
             }}
           />
