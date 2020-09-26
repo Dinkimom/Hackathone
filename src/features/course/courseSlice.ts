@@ -49,7 +49,7 @@ export const courseFetch = (data: string): AppThunk => async dispatch => {
 
     dispatch(courseFetchSuccess(response.data));
   } catch (error) {
-    dispatch(courseFetchFailure(error));
+    dispatch(courseFetchFailure(error.message));
   }
 };
 

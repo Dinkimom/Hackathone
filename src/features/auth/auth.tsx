@@ -8,7 +8,9 @@ import './auth.css';
 import { loginToggle } from './authSlice';
 
 export const Auth: React.FC = () => {
-  const { isOpened, step, error } = useSelector((state: RootState) => state.auth);
+  const { isOpened, step, error, isLoading } = useSelector(
+    (state: RootState) => state.auth
+  );
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -23,7 +25,13 @@ export const Auth: React.FC = () => {
         <div className="login-form number">
           <InputMask mask="+7 (999) 999–99–99" maskPlaceholder={null}>
             {() => (
-              <TextField label="Номер телефона" type="tel" variant="outlined" fullWidth />
+              <TextField
+                required
+                label="Номер телефона"
+                type="tel"
+                variant="outlined"
+                fullWidth
+              />
             )}
           </InputMask>
           <p>Мы отправим на него СМС с кодом подтверждения</p>
@@ -31,7 +39,9 @@ export const Auth: React.FC = () => {
             Подтверждая номер телефона вы принимаете условия{' '}
             <b>Пользовательского соглашения и политики конфиденциальности</b>
           </p>
-          <button className="primary">Получить код</button>
+          <button className="primary" type="submit">
+            Получить код
+          </button>
         </div>
       );
     } else if (step === 'otp') {
@@ -48,6 +58,9 @@ export const Auth: React.FC = () => {
             )}
           </InputMask>
           <p>Отправить код еще раз</p>
+          <button className="primary" type="submit">
+            Отправить код
+          </button>
         </div>
       );
     }
@@ -57,15 +70,10 @@ export const Auth: React.FC = () => {
         <form>{inner}</form>
       </ModalBody>
     );
-  }, [step, error]);
+  }, [step, error, isLoading]);
 
   return (
-    <Modal
-      open={isOpened}
-      onClose={handleClose}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
+    <Modal open={isOpened} onClose={handleClose}>
       {renderForm}
     </Modal>
   );

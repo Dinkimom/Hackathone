@@ -6,22 +6,36 @@ interface PaymentState {
   step: 'start' | 'qr' | 'success';
   error: string | null;
   course: EventDto | null;
+  isLoading: boolean;
+  isOpened: boolean;
 }
 
 const initialState: PaymentState = {
   step: 'start',
   error: null,
   course: null,
+  isLoading: false,
+  isOpened: false,
 };
 
 export const paymentSlice = createSlice({
   name: 'payment',
   initialState,
   reducers: {
+    paymentToggle: state => {
+      state.isOpened = !state.isOpened;
+    },
     paymentOpenCourse: (state, action: PayloadAction<EventDto>) => {
       state.step = 'start';
       state.error = null;
       state.course = action.payload;
+      state.isOpened = true;
+    },
+    paymentStart: state => {
+      state.isLoading = true;
+    },
+    paymentStartQr: state => {
+      state.step = 'qr';
     },
     paymentSuccess: state => {
       state.step = 'success';
@@ -32,4 +46,33 @@ export const paymentSlice = createSlice({
   },
 });
 
-export const pay = (data: EventDto): AppThunk => async dispatch => {};
+export const {
+  paymentToggle,
+  paymentOpenCourse,
+  paymentStart,
+  paymentStartQr,
+  paymentSuccess,
+  paymentFailure,
+} = paymentSlice.actions;
+
+export const payment = (data: EventDto): AppThunk => async dispatch => {
+  try {
+    dispatch(paymentStart());
+
+    // todo
+  } catch (error) {
+    dispatch(paymentFailure(error.message));
+  }
+};
+
+export const paymentQr = (data: any): AppThunk => async dispatch => {
+  try {
+    dispatch(paymentStartQr());
+
+    // todo const response = await ...
+  } catch (error) {
+    dispatch(paymentFailure(error.message));
+  }
+};
+
+export default paymentSlice.reducer;

@@ -10,8 +10,8 @@ export const authLoginByToken = () => {
   return apiGet('/login');
 };
 
-export const getCourses = (params: PaginationData) => {
-  return apiGet('/courses', { params });
+export const getCourses = () => {
+  return apiGet('/event');
 };
 
 export const getCourse = (data: string) => {

@@ -5,8 +5,22 @@ import './home.css';
 import image1 from '../../assets/images/1.png';
 import image2 from '../../assets/images/2.png';
 import image3 from '../../assets/images/3.png';
+import { useDispatch } from 'react-redux';
+import { createCourseToggle } from 'features/createCourse/createCourseSlice';
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const Home: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const handleCreateCourseOpen = () => {
+    dispatch(createCourseToggle());
+  };
+
+  const handleCoursesOpen = () => {
+    return <Redirect to="/courses" />;
+  };
+
   return (
     <div className="home">
       <div className="home__banner">
@@ -14,7 +28,9 @@ export const Home: React.FC = () => {
           <div className="home__banner__left-column">
             <h1>Сервис для организациии off-line мероприятий</h1>
             <p>Meet-up, обучение, workshop</p>
-            <button className="primary">Каталог курсов</button>
+            <Link to="/courses">
+              <button className="primary">Каталог курсов</button>
+            </Link>
           </div>
           <div className="home__banner__right-column">
             <img
@@ -97,7 +113,9 @@ export const Home: React.FC = () => {
             группах. Или пригласите человека, который сможет проветси обучение
           </p>
           <div className="home__action__buttons">
-            <button className="primary">Стать автором</button>
+            <button className="primary" onClick={handleCreateCourseOpen}>
+              Стать автором
+            </button>
             <button className="primary">Пригласить автора</button>
           </div>
         </div>

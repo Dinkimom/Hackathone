@@ -11,5 +11,7 @@ export interface EventDto {
   duration: number;
   isNeedCoach: boolean;
   isNeedDesigner: boolean;
-  price?: number;
+  price: number;
+  registered: boolean;
+  date: string;
 }

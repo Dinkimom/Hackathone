@@ -4,6 +4,8 @@ import counterReducer from '../features/counter/counterSlice';
 import courseReducer from '../features/course/courseSlice';
 import profileReducer from '../features/profile/profileSlice';
 import coursesReducer from './../features/courses/coursesSlice';
+import createCourseReducer from './../features/createCourse/createCourseSlice';
+import paymentReducer from './../features/payment/paymentSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +13,8 @@ export const store = configureStore({
     course: courseReducer,
     courses: coursesReducer,
     profile: profileReducer,
+    payment: paymentReducer,
+    createCourse: createCourseReducer,
     // todo delete below
     counter: counterReducer,
   },

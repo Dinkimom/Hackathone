@@ -1,0 +1,21 @@
+.payment-form {
+  width: 700px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 40px;
+}
+
+.payment-form .MuiInputBase-formControl {
+	margin-bottom: 20px;
+}
+
+.payment-form__details p {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+}
+
+.payment-form__details span {
+  font-size: 12px;
+  line-height: 14px;
+}

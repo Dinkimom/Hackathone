@@ -20,23 +20,24 @@
 }
 
 .header__links {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .header__links img {
-	margin-left: 57px;
+  margin-left: 57px;
 }
 
-.header__links a {
+.header__links span {
   margin-left: 24px;
   font-size: 12px;
   line-height: 20px;
   color: var(--primary-font-color);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 480px) {
-  .header__links a {
+  .header__links span {
     display: none;
   }
 }

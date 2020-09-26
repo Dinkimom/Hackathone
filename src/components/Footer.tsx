@@ -10,7 +10,9 @@ export const Footer: React.FC = () => {
           <p>Университетская ул., 7, 217, Иннополис, Респ. Татарстан, 420500</p>
         </div>
         <div className="footer__right-column">
-          <button className="primary">Связаться с нами</button>
+          <a href="mailto:sample@akbarsdigital.ru">
+            <button className="primary">Связаться с нами</button>
+          </a>
         </div>
       </div>
     </footer>

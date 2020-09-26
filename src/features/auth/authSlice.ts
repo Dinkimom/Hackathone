@@ -78,7 +78,7 @@ export const loginOtp = (data: UserLoginDto): AppThunk => async dispatch => {
 
     dispatch(loginOtpSuccess(response.data));
   } catch (error) {
-    dispatch(loginOtpFailure(error));
+    dispatch(loginOtpFailure(error.message));
   }
 };
 
@@ -86,17 +86,5 @@ export const loginConfirm = (): AppThunk => async dispatch => {
   try {
   } catch {}
 };
-
-// export const loginByToken = (): AppThunk => async dispatch => {
-//   try {
-//     dispatch(loginStart());
-
-//     const response = await authLoginByToken();
-
-//     dispatch(loginSuccess(response.data));
-//   } catch (error) {
-//     dispatch(loginFailure(error));
-//   }
-// };
 
 export default authSlice.reducer;

@@ -1,14 +1,14 @@
-import { getCourses } from './../../services/api';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../../app/store';
-import { CourseDto } from './../../dtos/CourseDto';
 import { CoursesDto } from './../../dtos/CoursesDto';
+import { EventDto } from './../../dtos/EventDto';
+import { getCourses } from './../../services/api';
 import { PaginationData } from './../../types/PaginationData';
 
 interface CoursesSlice {
   isLoading: boolean;
   error: string | null;
-  list: CourseDto[];
+  list: EventDto[];
   pagination: PaginationData;
 }
 
@@ -32,11 +32,10 @@ export const coursesSlice = createSlice({
       state.error = null;
       state.list = [];
     },
-    coursesFetchSuccess: (state, action: PayloadAction<CoursesDto>) => {
+    coursesFetchSuccess: (state, action: PayloadAction<EventDto[]>) => {
       state.isLoading = false;
       state.error = null;
-      state.list = action.payload.list;
-      state.pagination = action.payload.pagination;
+      state.list = action.payload;
     },
     coursesFetchFailure: (state, action: PayloadAction<string>) => {
       return { ...initialState, error: action.payload };
@@ -50,15 +49,15 @@ export const {
   coursesFetchFailure,
 } = coursesSlice.actions;
 
-export const coursesFetch = (data: PaginationData): AppThunk => async dispatch => {
+export const coursesFetch = (): AppThunk => async dispatch => {
   try {
     dispatch(coursesFetchStart());
 
-    const response = await getCourses(data);
+    const response = await getCourses();
 
     dispatch(coursesFetchSuccess(response.data));
   } catch (error) {
-    dispatch(coursesFetchFailure(error));
+    dispatch(coursesFetchFailure(error.message));
   }
 };
 

@@ -1,9 +1,11 @@
 import { RootState } from 'app/store';
 import { loginToggle } from 'features/auth/authSlice';
+import { createCourseToggle } from 'features/createCourse/createCourseSlice';
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import logo from '../assets/images/logo.svg';
+import { Link } from 'react-router-dom';
 import userIcon from '../assets/icons/user.svg';
+import logo from '../assets/images/logo.svg';
 import './Header.css';
 
 export const Header: React.FC = () => {
@@ -12,6 +14,10 @@ export const Header: React.FC = () => {
 
   const handleLoginOpen = () => {
     dispatch(loginToggle());
+  };
+
+  const handleCreateCourseOpen = () => {
+    dispatch(createCourseToggle());
   };
 
   const renderProfileLint = useMemo(() => {
@@ -30,10 +36,13 @@ export const Header: React.FC = () => {
     <>
       <header className="header">
         <div className="container">
-          <img src={logo} alt="logo" />
+          <Link to="/home">
+            <img src={logo} alt="logo" />
+          </Link>
+
           <div className="header__links">
-            <a href="">Стать автором</a>
-            <a href="">Пригласить автора</a>
+            <span onClick={handleCreateCourseOpen}>Стать автором</span>
+            <span onClick={() => null}>Пригласить автора</span>
             {renderProfileLint}
           </div>
         </div>

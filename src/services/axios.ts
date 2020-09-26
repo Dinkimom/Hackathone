@@ -5,9 +5,9 @@ import { getAuthToken } from './token';
 export const axiosClient = () => {
   return axios.create({
     baseURL,
-    headers: {
-      Authorization: `Bearer ${getAuthToken()}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${getAuthToken()}`,
+    // },
   });
 };
 
