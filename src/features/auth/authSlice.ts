@@ -1,6 +1,6 @@
 import { Step } from '@material-ui/core';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { deleteAuthToken } from 'services/token';
+import { deleteAuthToken, setAuthToken } from 'services/token';
 import { AppThunk } from '../../app/store';
 import { UserDto } from './../../dtos/UserDto';
 import { UserLoginDto } from './../../dtos/UserLoginDto';
@@ -104,7 +104,11 @@ export const loginConfirm = (data: UserLoginDto): AppThunk => async dispatch => 
   try {
     dispatch(loginConfirmStart());
 
-    const response = await authLoginConfirm(data);
+	const response = await authLoginConfirm(data);
+	
+	console.log(response.data.person)
+
+    setAuthToken(response.data.person.id);
 
     dispatch(loginConfirmSuccess(response.data));
   } catch (error) {

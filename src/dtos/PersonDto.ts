@@ -5,4 +5,5 @@ export interface PersonDto {
   patronymic: string;
   workPlace: string;
   phoneNumber: string;
+  fio: string;
 }

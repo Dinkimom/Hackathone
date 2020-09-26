@@ -1,4 +1,4 @@
-const tokenKey = 'authorization_token';
+const tokenKey = 'userId';
 
 export function setAuthToken(token: string) {
   try {

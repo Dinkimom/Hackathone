@@ -9,11 +9,11 @@ export const EventDetails: React.FC<Props> = ({ event }) => {
   return (
     <>
       <span>Дата</span>
-      <p>{event.date}</p>
+      <p>{new Date(event.date).toLocaleDateString()}</p>
       {event.teacher.person && (
         <>
           <span>Ведет</span>
-          <p>{`${event.teacher.person.firstName} ${event.teacher.person.patronymic} ${event.teacher.person.lastName}`}</p>
+          <p>{event.teacher.person.fio}</p>
         </>
       )}
       <span>Тема курса</span>
@@ -21,11 +21,7 @@ export const EventDetails: React.FC<Props> = ({ event }) => {
       {event.area.address && (
         <>
           <span>Место</span>
-          <p>
-            {event.area.address.city} {event.area.address.street}{' '}
-            {event.area.address.houseNumber} {event.area.address.flatNumber}{' '}
-            {event.area.address.block}
-          </p>
+          <p>{event.area.address}</p>
         </>
       )}
     </>

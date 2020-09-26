@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { baseURL } from '../constants/baseURL';
+import { getAuthToken } from './token';
 
 export const axiosClient = (options?: AxiosRequestConfig) => {
   return axios.create({

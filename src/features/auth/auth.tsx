@@ -34,7 +34,7 @@ export const Auth: React.FC = () => {
     if (step === 'number') {
       inner = (
         <div className="login-form number">
-          <InputMask mask="+7 (999) 999–99–99" maskPlaceholder={null}>
+          <InputMask mask="+79999999999" maskPlaceholder={null}>
             {() => (
               <TextField
                 required
@@ -60,7 +60,7 @@ export const Auth: React.FC = () => {
     } else if (step === 'otp') {
       inner = (
         <div className="login-form otp">
-          <InputMask mask="+7 (999) 999–99–99" maskPlaceholder={null}>
+          <InputMask mask="+79999999999" maskPlaceholder={null}>
             {() => (
               <TextField
                 required

@@ -1,6 +1,3 @@
-import { InputLabel } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import { RootState } from 'app/store';
 import { ContentWrapper } from 'components/ContentWrapper';
@@ -55,27 +52,7 @@ export const Courses: React.FC = () => {
   return (
     <ContentWrapper isLoading={isLoading} error={error} className="courses">
       <h1>Курсы</h1>
-      <div className="courses__main">
-        <div className="courses__main__filters">
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel>О чем курс</InputLabel>
-            <Select label="О чем курс"></Select>
-          </FormControl>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel>Место</InputLabel>
-            <Select label="Место"></Select>
-          </FormControl>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel>Дата</InputLabel>
-            <Select label="Дата"></Select>
-          </FormControl>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel>Цена</InputLabel>
-            <Select label="Цена"></Select>
-          </FormControl>
-        </div>
-        <div className="courses__main__list">{renderCourses}</div>
-      </div>
+      <div className="courses__main">{renderCourses}</div>
     </ContentWrapper>
   );
 };
