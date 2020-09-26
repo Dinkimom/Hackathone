@@ -4,6 +4,8 @@ import { EventType } from './../types/EventType';
 
 export interface EventDto {
   id: string;
+  name: string;
+  sphere: 1 | 2 | 3 | 4 | 5;
   eventType: EventType;
   description: string;
   area: AreaDto;

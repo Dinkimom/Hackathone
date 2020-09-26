@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from '../../app/store';
 import { CoursesDto } from './../../dtos/CoursesDto';
 import { EventDto } from './../../dtos/EventDto';
-import { getCourses } from './../../services/api';
+import { getCourses, subscribe } from './../../services/api';
 import { PaginationData } from './../../types/PaginationData';
 
 interface CoursesSlice {
@@ -40,6 +40,12 @@ export const coursesSlice = createSlice({
     coursesFetchFailure: (state, action: PayloadAction<string>) => {
       return { ...initialState, error: action.payload };
     },
+    coursesSubscribeStart: state => {
+      state.isLoading = true;
+    },
+    coursesSubscribeSuccess: state => {
+      state.isLoading = false;
+    },
   },
 });
 
@@ -47,6 +53,8 @@ export const {
   coursesFetchStart,
   coursesFetchSuccess,
   coursesFetchFailure,
+  coursesSubscribeStart,
+  coursesSubscribeSuccess,
 } = coursesSlice.actions;
 
 export const coursesFetch = (): AppThunk => async dispatch => {
@@ -58,6 +66,18 @@ export const coursesFetch = (): AppThunk => async dispatch => {
     dispatch(coursesFetchSuccess(response.data));
   } catch (error) {
     dispatch(coursesFetchFailure(error.message));
+  }
+};
+
+export const courseSubscribe = (data: string): AppThunk => async dispatch => {
+  try {
+    dispatch(coursesSubscribeStart());
+
+    await subscribe(data);
+
+    alert('Вы успешно подписаны');
+  } catch (error) {
+    alert('Проблемесы');
   }
 };
 

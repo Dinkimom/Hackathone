@@ -58,6 +58,11 @@ button.primary:hover {
   opacity: 0.5;
 }
 
+button.primary:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
 h3 {
   margin: 24px 0;
   font-size: 32px;

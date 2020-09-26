@@ -1,3 +1,5 @@
+import { coursesFetch } from './../courses/coursesSlice';
+import { postCourse } from './../../services/api';
 import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppThunk } from '../../app/store';
@@ -44,11 +46,13 @@ export const createCourse = (data: any): AppThunk => async dispatch => {
   try {
     dispatch(createCourseStart());
 
-    // todo add snack bar
+    await postCourse(data);
+
+    dispatch(createCourseSuccess());
+
+    dispatch(coursesFetch());
   } catch (error) {
     dispatch(createCourseFailure());
-
-    // todo add snack bar
   }
 };
 

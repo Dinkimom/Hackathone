@@ -80,7 +80,6 @@ export const Header: React.FC = () => {
           <div className="header__links">
             {!isAuthorized && (
               <>
-                <span onClick={handleCreateCourseOpen}>Заказать обучение</span>
                 <Link to="/courses">
                   <span>Курсы</span>
                 </Link>

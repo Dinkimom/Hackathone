@@ -2,11 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { RootState } from 'app/store';
 import { ContentWrapper } from 'components/ContentWrapper';
 import { EventDetails } from 'components/EventDetails';
-import { paymentOpenCourse } from 'features/payment/paymentSlice';
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouteMatch } from 'react-router-dom';
 import './courses.css';
-import { coursesFetch } from './coursesSlice';
+import { coursesFetch, courseSubscribe } from './coursesSlice';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -15,8 +15,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Courses: React.FC = () => {
+  const { isAuthorized } = useSelector((state: RootState) => state.auth);
   const { isLoading, list, error } = useSelector((state: RootState) => state.courses);
   const classes = useStyles();
+
+  const isMy = useRouteMatch('/courses/my');
 
   const dispatch = useDispatch();
 
@@ -29,17 +32,22 @@ export const Courses: React.FC = () => {
       return <h4 className="courses-empty">Не найдено ни одного курса</h4>;
     }
 
-    const handleRegister = item => {
-      dispatch(paymentOpenCourse(item));
+    const handleRegister = id => {
+      dispatch(courseSubscribe(id));
     };
 
     return list.map(item => (
       <div className="course">
         <div className="course__left-column">
-          <h3>Sample</h3>
+          <h3>{item.name}</h3>
           <p>{item.description}</p>
-          <button className="primary" onClick={() => handleRegister(item)}>
-            {!item.price ? 'Бесплатно' : `${item.price} ₽`}
+
+          <button
+            className="primary"
+            onClick={() => handleRegister(item.id)}
+            disabled={!isAuthorized}
+          >
+            {!item.price ? 'Зарегистрироваться' : `${item.price} ₽`}
           </button>
         </div>
         <div className="course__right-column">
@@ -47,7 +55,7 @@ export const Courses: React.FC = () => {
         </div>
       </div>
     ));
-  }, [list]);
+  }, [list, isAuthorized]);
 
   return (
     <ContentWrapper isLoading={isLoading} error={error} className="courses">
