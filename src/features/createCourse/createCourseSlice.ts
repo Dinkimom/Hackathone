@@ -3,6 +3,7 @@ import { postCourse } from './../../services/api';
 import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppThunk } from '../../app/store';
+import { toast } from 'react-toastify';
 interface CreateCourseState {
   isLoading: boolean;
   isOpened: boolean;
@@ -48,7 +49,9 @@ export const createCourse = (data: any): AppThunk => async dispatch => {
 
     await postCourse(data);
 
-    dispatch(createCourseSuccess());
+	dispatch(createCourseSuccess());
+	
+	toast.success('Курс успешно создан :-)');
 	
 	if (window.location.pathname === '/courses/my') {
 		dispatch(coursesMyFetch());
