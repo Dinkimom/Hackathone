@@ -1,4 +1,4 @@
-import { coursesFetch } from './../courses/coursesSlice';
+import { coursesFetch, coursesMyFetch } from './../courses/coursesSlice';
 import { postCourse } from './../../services/api';
 import React from 'react';
 import { createSlice } from '@reduxjs/toolkit';
@@ -49,8 +49,12 @@ export const createCourse = (data: any): AppThunk => async dispatch => {
     await postCourse(data);
 
     dispatch(createCourseSuccess());
-
-    dispatch(coursesFetch());
+	
+	if (window.location.pathname === '/courses/my') {
+		dispatch(coursesMyFetch());
+	} else {
+		dispatch(coursesFetch());
+	}
   } catch (error) {
     dispatch(createCourseFailure());
   }

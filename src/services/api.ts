@@ -16,13 +16,15 @@ export const getCourses = () => {
   return apiGet('/event');
 };
 
+export const getMyCourses = () => {
+  return apiGet('/event/my', { params: { UserId: getAuthToken() } });
+};
+
 export const subscribe = (params: any) => {
   return apiPost('/event/subscribe', {
-    headers: {
-      user_id: getAuthToken(),
-    },
     params: {
       eventId: params,
+      UserId: getAuthToken(),
     },
   });
 };

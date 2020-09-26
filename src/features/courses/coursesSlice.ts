@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { AppThunk } from '../../app/store';
-import { CoursesDto } from './../../dtos/CoursesDto';
 import { EventDto } from './../../dtos/EventDto';
-import { getCourses, subscribe } from './../../services/api';
+import { getCourses, getMyCourses, subscribe } from './../../services/api';
 import { PaginationData } from './../../types/PaginationData';
 
 interface CoursesSlice {
@@ -46,6 +46,9 @@ export const coursesSlice = createSlice({
     coursesSubscribeSuccess: state => {
       state.isLoading = false;
     },
+    coursesSubscribeFailure: state => {
+      state.isLoading = false;
+    },
   },
 });
 
@@ -55,6 +58,7 @@ export const {
   coursesFetchFailure,
   coursesSubscribeStart,
   coursesSubscribeSuccess,
+  coursesSubscribeFailure,
 } = coursesSlice.actions;
 
 export const coursesFetch = (): AppThunk => async dispatch => {
@@ -75,9 +79,25 @@ export const courseSubscribe = (data: string): AppThunk => async dispatch => {
 
     await subscribe(data);
 
-    alert('Вы успешно подписаны');
+    toast.success('Вы успешно подписаны');
+
+    dispatch(coursesSubscribeSuccess());
   } catch (error) {
-    alert('Проблемесы');
+    toast.error('Возникли проблемы...');
+
+    dispatch(coursesSubscribeFailure());
+  }
+};
+
+export const coursesMyFetch = (): AppThunk => async dispatch => {
+  try {
+    dispatch(coursesFetchStart());
+
+    const response = await getMyCourses();
+
+    dispatch(coursesFetchSuccess(response.data));
+  } catch (error) {
+    dispatch(coursesFetchFailure(error.message));
   }
 };
 

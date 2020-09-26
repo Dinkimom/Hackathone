@@ -7,7 +7,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import './courses.css';
-import { coursesFetch, courseSubscribe } from './coursesSlice';
+import { coursesFetch, coursesMyFetch, courseSubscribe } from './coursesSlice';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -20,12 +20,22 @@ export const Courses: React.FC = () => {
   const { isLoading, list, error } = useSelector((state: RootState) => state.courses);
   const classes = useStyles();
 
-  const isMy = useRouteMatch('/courses/my');
+  const match = useRouteMatch('/courses/my');
+
+  const isMy = match ? match.isExact : false;
 
   const dispatch = useDispatch();
 
+  const fetch = () => {
+    if (isMy) {
+      dispatch(coursesMyFetch());
+    } else {
+      dispatch(coursesFetch());
+    }
+  };
+
   useEffect(() => {
-    dispatch(coursesFetch());
+    fetch();
   }, []);
 
   const renderCourses = useMemo(() => {
@@ -47,7 +57,7 @@ export const Courses: React.FC = () => {
             <button
               className="primary"
               onClick={() => handleRegister(item.id)}
-              disabled={!isAuthorized}
+              disabled={!isAuthorized || item.isRegistered}
             >
               {!item.price ? 'Зарегистрироваться' : `${item.price} ₽`}
             </button>
