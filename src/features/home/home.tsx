@@ -1,14 +1,14 @@
+import { createCourseToggle } from 'features/createCourse/createCourseSlice';
 import React from 'react';
-
-import bannerImg from '../../assets/images/banner.svg';
-import './home.css';
+import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import image1 from '../../assets/images/1.png';
 import image2 from '../../assets/images/2.png';
 import image3 from '../../assets/images/3.png';
-import { useDispatch } from 'react-redux';
-import { createCourseToggle } from 'features/createCourse/createCourseSlice';
-import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
+import image4 from '../../assets/images/4.png';
+import bannerImg from '../../assets/images/banner.svg';
+import './home.css';
 
 export const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -83,6 +83,9 @@ export const Home: React.FC = () => {
       <div className="home__text-block">
         <div className="container grid">
           <div className="home__text-block__left-column">
+            <img src={image3} alt="text-block-image" />
+          </div>
+          <div className="home__text-block__right-column">
             <h3>Коуч и дизайнер</h3>
             <p>
               Наши коучи и дизайнеры помогут построить программу обучения в правильной
@@ -91,8 +94,24 @@ export const Home: React.FC = () => {
               материала
             </p>
           </div>
+        </div>
+      </div>
+
+      <div className="home__text-block reversed">
+        <div className="container grid">
+          <div className="home__text-block__left-column">
+            <h3>Заказать обучение</h3>
+            <p>
+              Интерактивные истории Теория — это небольшие истории на современные темы:
+              инвестиции, подкасты, компьютерные игры, сёрфинг и ещё много-много сюжетов.
+              В них вы изучаете грамматику и лексику, слушаете диалоги и выполняете
+              упражнения. Разные голоса в упражнениях помогают тренировать понимание на
+              слух. Например, продавца овощей в Чайна-тауне озвучивает американец с
+              китайским акцентом.
+            </p>
+          </div>
           <div className="home__text-block__right-column">
-            <img src={image3} alt="text-block-image" />
+            <img src={image4} alt="text-block-image" />
           </div>
         </div>
       </div>
@@ -108,7 +127,7 @@ export const Home: React.FC = () => {
             <button className="primary" onClick={handleCreateCourseOpen}>
               Стать автором
             </button>
-            <button className="primary">Пригласить автора</button>
+            <button className="primary">Заказать обучение</button>
           </div>
         </div>
       </div>
